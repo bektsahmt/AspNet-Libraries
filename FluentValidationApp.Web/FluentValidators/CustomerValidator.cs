@@ -13,8 +13,11 @@ namespace FluentValidationApp.Web.FluentValidators
             RuleFor(x => x.Age).NotEmpty().WithMessage("Yaş Alanı Boş Olamaz!").InclusiveBetween(18, 60).WithMessage("Yaşınız 18'den büyük 60'dan da küçük olmalıdır.");
             RuleFor(x => x.Birthday).NotEmpty().WithMessage(NotEmptyMessage).Must(x =>
             {
-                //return DateTime.Now.AddYears(-18) =>x;
-            });
+                return DateTime.Now.AddYears(-18) >=x;
+            }).WithMessage("Yaşınız 18'den büyük olmalıdır.");
+
+            RuleFor(x => x.Gender).IsInEnum().WithMessage("{PropertyName} alanı Erkek için 1, Kadın için 2 olmalıdır.");
+            RuleForEach(x => x.Addresses).SetValidator(new AddressValidator());
         }
     }
 }
