@@ -21,6 +21,10 @@ namespace FluentValidationApp.Web.Controllers
             _customerValidator = customerValidator;
         }
 
+        
+
+            
+
         // GET: Customers
         public async Task<IActionResult> Index()
         {
